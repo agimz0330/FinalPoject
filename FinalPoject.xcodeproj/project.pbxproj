@@ -18,6 +18,7 @@
 		35E4CFF42847721C00143067 /* MailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4CFF32847721C00143067 /* MailLogin.swift */; };
 		35E4CFF7284A4C2100143067 /* MakeRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4CFF6284A4C2100143067 /* MakeRoleView.swift */; };
 		35E4CFFD284CA93500143067 /* MyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4CFFC284CA93500143067 /* MyColor.swift */; };
+		35E4D001284F56CE00143067 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D000284F56CE00143067 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		35E4CFF32847721C00143067 /* MailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailLogin.swift; sourceTree = "<group>"; };
 		35E4CFF6284A4C2100143067 /* MakeRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoleView.swift; sourceTree = "<group>"; };
 		35E4CFFC284CA93500143067 /* MyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColor.swift; sourceTree = "<group>"; };
+		35E4D000284F56CE00143067 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				35E321012822237A003F72C8 /* Preview Content */,
 				35E4CFF32847721C00143067 /* MailLogin.swift */,
 				35E4CFFC284CA93500143067 /* MyColor.swift */,
+				35E4D000284F56CE00143067 /* User.swift */,
 			);
 			path = FinalPoject;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				35E4CFFD284CA93500143067 /* MyColor.swift in Sources */,
 				35E4CFF7284A4C2100143067 /* MakeRoleView.swift in Sources */,
+				35E4D001284F56CE00143067 /* User.swift in Sources */,
 				35E4CFF42847721C00143067 /* MailLogin.swift in Sources */,
 				35E320FE2822236F003F72C8 /* ContentView.swift in Sources */,
 				35E320FC2822236F003F72C8 /* FinalPojectApp.swift in Sources */,

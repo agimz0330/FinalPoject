@@ -16,7 +16,8 @@ struct FinalPojectApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            MakeRoleView()
         }
     }
 }

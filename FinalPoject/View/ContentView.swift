@@ -14,12 +14,22 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             bg_color
-            
-            if isLogin{
-                VStack{
-                   // GameView()
-                }
-            }
+                .edgesIgnoringSafeArea(.all)
+
+            RoundedRectangle(cornerRadius: 30)
+                .fill(pink_light)
+                .frame(width: 120, height: 80)
+
+            RoundedRectangle(cornerRadius: 30)
+                .stroke(pink_dark, lineWidth: 10)
+                .frame(width: 120, height: 80)
+                
+                
+//            if isLogin{
+//                VStack{
+//                   // GameView()
+//                }
+//            }
         }
     }
 }
@@ -27,6 +37,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .previewLayout(.fixed(width: 896, height: 414))
+            .previewLayout(.fixed(width: 812, height: 375))
     }
 }
