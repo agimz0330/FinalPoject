@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35AE0D2D285323D30055B263 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE0D2C285323D30055B263 /* ProfileView.swift */; };
+		35AE0D302853289A0055B263 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE0D2F2853289A0055B263 /* EditProfileView.swift */; };
 		35E320FC2822236F003F72C8 /* FinalPojectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E320FB2822236F003F72C8 /* FinalPojectApp.swift */; };
 		35E320FE2822236F003F72C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E320FD2822236F003F72C8 /* ContentView.swift */; };
 		35E321002822237A003F72C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E320FF2822237A003F72C8 /* Assets.xcassets */; };
@@ -19,9 +21,14 @@
 		35E4CFF7284A4C2100143067 /* MakeRoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4CFF6284A4C2100143067 /* MakeRoleView.swift */; };
 		35E4CFFD284CA93500143067 /* MyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4CFFC284CA93500143067 /* MyColor.swift */; };
 		35E4D001284F56CE00143067 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D000284F56CE00143067 /* User.swift */; };
+		35E4D00A2850DB8400143067 /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D0092850DB8400143067 /* ExtensionView.swift */; };
+		35E4D00E2851151C00143067 /* Pincllo Demo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 35E4D00D2851151C00143067 /* Pincllo Demo.ttf */; };
+		35E4D012285116BC00143067 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E4D011285116BC00143067 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35AE0D2C285323D30055B263 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		35AE0D2F2853289A0055B263 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		35E320F82822236F003F72C8 /* FinalPoject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalPoject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35E320FB2822236F003F72C8 /* FinalPojectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalPojectApp.swift; sourceTree = "<group>"; };
 		35E320FD2822236F003F72C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +40,9 @@
 		35E4CFF6284A4C2100143067 /* MakeRoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoleView.swift; sourceTree = "<group>"; };
 		35E4CFFC284CA93500143067 /* MyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColor.swift; sourceTree = "<group>"; };
 		35E4D000284F56CE00143067 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		35E4D0092850DB8400143067 /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
+		35E4D00D2851151C00143067 /* Pincllo Demo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pincllo Demo.ttf"; sourceTree = "<group>"; };
+		35E4D011285116BC00143067 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +88,7 @@
 				35E4CFF32847721C00143067 /* MailLogin.swift */,
 				35E4CFFC284CA93500143067 /* MyColor.swift */,
 				35E4D000284F56CE00143067 /* User.swift */,
+				35E4D00D2851151C00143067 /* Pincllo Demo.ttf */,
 			);
 			path = FinalPoject;
 			sourceTree = "<group>";
@@ -102,6 +113,10 @@
 			children = (
 				35E320FD2822236F003F72C8 /* ContentView.swift */,
 				35E4CFF6284A4C2100143067 /* MakeRoleView.swift */,
+				35E4D0092850DB8400143067 /* ExtensionView.swift */,
+				35E4D011285116BC00143067 /* LoginView.swift */,
+				35AE0D2C285323D30055B263 /* ProfileView.swift */,
+				35AE0D2F2853289A0055B263 /* EditProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,6 +188,7 @@
 			files = (
 				35E321032822237A003F72C8 /* Preview Assets.xcassets in Resources */,
 				35E321002822237A003F72C8 /* Assets.xcassets in Resources */,
+				35E4D00E2851151C00143067 /* Pincllo Demo.ttf in Resources */,
 				35E3210C2822242F003F72C8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,11 +200,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AE0D302853289A0055B263 /* EditProfileView.swift in Sources */,
 				35E4CFFD284CA93500143067 /* MyColor.swift in Sources */,
+				35AE0D2D285323D30055B263 /* ProfileView.swift in Sources */,
 				35E4CFF7284A4C2100143067 /* MakeRoleView.swift in Sources */,
 				35E4D001284F56CE00143067 /* User.swift in Sources */,
 				35E4CFF42847721C00143067 /* MailLogin.swift in Sources */,
+				35E4D00A2850DB8400143067 /* ExtensionView.swift in Sources */,
 				35E320FE2822236F003F72C8 /* ContentView.swift in Sources */,
+				35E4D012285116BC00143067 /* LoginView.swift in Sources */,
 				35E320FC2822236F003F72C8 /* FinalPojectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

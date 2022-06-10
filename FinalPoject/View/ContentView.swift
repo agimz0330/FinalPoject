@@ -9,27 +9,28 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var isLogin: Bool = false
+    @State private var isLogin: Bool = true
     
     var body: some View {
         ZStack{
-            bg_color
-                .edgesIgnoringSafeArea(.all)
-
-            RoundedRectangle(cornerRadius: 30)
-                .fill(pink_light)
-                .frame(width: 120, height: 80)
-
-            RoundedRectangle(cornerRadius: 30)
-                .stroke(pink_dark, lineWidth: 10)
-                .frame(width: 120, height: 80)
-                
-                
-//            if isLogin{
-//                VStack{
-//                   // GameView()
-//                }
-//            }
+            TabView{
+                ZStack{
+                    
+                }
+                .tabItem {
+                    Text("HOME")
+                    Image(systemName: "house")
+                }
+                ProfileView()
+                    .tabItem{
+                        Text("Profile")
+                        Image(systemName: "person.crop.circle")
+                    }
+            }
+            .accentColor(orange_dark)
+            if !isLogin{
+                LoginView()
+            }
         }
     }
 }

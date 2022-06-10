@@ -21,3 +21,9 @@ struct ImgSize {
 let part_count = ["background": 15, "man_head": 30, "man_face": 23, "man_bread": 11,
                   "woman_head": 37, "woman_face": 17, "woman_glass": 7
 ]
+
+//struct User: Codable, Identifiable{
+//    var name: String
+//    var mail: String
+//    var gender: String // "man" or "woman"
+//}

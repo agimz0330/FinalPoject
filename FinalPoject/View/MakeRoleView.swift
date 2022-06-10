@@ -9,18 +9,20 @@ import SwiftUI
 
 struct MakeRoleView: View {
     @State private var gender: String = "woman" // binding
+    @State private var uiImage: UIImage?
     
     @State private var backgroundIndex: Int = 1
     @State private var headIndex: Int = 1
     @State private var faceIndex: Int = 1
     @State private var otherIndex: Int = 1
     @State private var choosePart = "background"
+    @State private var bgColor: Color = bg_color
     
     var body: some View {
         let threeRowGrid = Array(repeating: GridItem(), count: 3)
         
         ZStack{
-            bg_color
+            bgColor
                 .edgesIgnoringSafeArea(.all)
             
             HStack(spacing: 0){
@@ -72,35 +74,53 @@ struct MakeRoleView: View {
                 
                 ZStack{
                     if gender == "man"{
-                        ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex)
+                        ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: $bgColor)
                     }
                     else{
-                        WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex)
+                        WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: $bgColor)
                     }
                     
                     VStack(alignment: .leading){
                         Spacer()
                         
                         HStack{
+                            ZStack{
+                                Circle()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 60, height: 60)
+                                
+                                ColorPicker("Choose backgroud color", selection: $bgColor)
+                                    .labelsHidden()
+                            }
+                            
                             Button(action: { // save
+                                if gender == "man"{
+                                    uiImage = ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: $bgColor).snapshot()
+                                }
+                                else{
+                                    uiImage = WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: $bgColor).snapshot()
+                                }
+                                UIImageWriteToSavedPhotosAlbum(uiImage!, nil, nil, nil)
                                 
                             }, label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 30)
-                                        .fill(Color.white)
-                                        .frame(width: 150, height: 60)
+                                        .fill(pink_light)
+                                        .frame(width: 120, height: 60)
 
                                     RoundedRectangle(cornerRadius: 30)
-                                        .stroke(pink_light, lineWidth: 5)
-                                        .frame(width: 150, height: 60)
+                                        .stroke(Color.white, lineWidth: 5)
+                                        .frame(width: 120, height: 60)
                                     
-                                    Text("S a v e")
-                                        .foregroundColor(pink_light)
-                                        .font(.title)
+                                    Text("Save")
+                                        .foregroundColor(Color.white)
+                                        .font((.custom("PinclloDemo", size: 45)))
                                         
                                 }
                                 .padding()
                             })
+                            
+                            
                             Spacer()
                         }
                     }
@@ -225,6 +245,7 @@ struct ManView: View {
     @Binding var headIndex: Int
     @Binding var faceIndex: Int
     @Binding var breadIndex: Int
+    @Binding var bgColor: Color
     
     var body: some View{
         let man_head_size: [ImgSize] = [
@@ -261,6 +282,8 @@ struct ManView: View {
         ]
         
         ZStack{
+            bgColor
+            
             Image("background\(backgroundIndex)")
                 .resizable()
                 .scaledToFit()
@@ -313,7 +336,7 @@ struct ManView: View {
                         .offset(x: 15, y: 25)
                 }
             }
-            .scaleEffect(1.25)
+            .scaleEffect(1.1)
         }
         .frame(width: 275, height: 250, alignment: .center)
     }
@@ -324,6 +347,7 @@ struct WomanView: View {
     @Binding var headIndex: Int
     @Binding var faceIndex: Int
     @Binding var glassIndex: Int
+    @Binding var bgColor: Color
     
     var body: some View{
         let woman_head_size: [ImgSize] = [
@@ -366,6 +390,8 @@ struct WomanView: View {
             ImgSize(h: 255, x: 25, y: 15)
             ]
         ZStack{
+            bgColor
+            
             Image("background\(backgroundIndex)")
                 .resizable()
                 .scaledToFit()
@@ -411,7 +437,7 @@ struct WomanView: View {
                 
                 
             }
-            .scaleEffect(1.25)
+            .scaleEffect(1.1)
         }
         .frame(width: 275, height: 250, alignment: .center)
         .padding()
