@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var showMakeRoleView: Bool = false
+    
     var body: some View {
         NavigationView{
             
@@ -24,10 +26,14 @@ struct ProfileView: View {
                                                      endPoint: UnitPoint(x: 1, y: 1)))
                                 .frame(width: 150, height: 150)
                             
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 135, height: 135)
+                            
                             Image("background15")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 140, height: 140)
+                                .frame(width: 135, height: 135)
                                 .clipShape(Circle())
                             
                         }
@@ -166,6 +172,10 @@ struct ProfileView: View {
                 .padding()
             }
             .navigationBarHidden(true)
+            
+            .fullScreenCover(isPresented: $showMakeRoleView, content: {
+                MakeRoleView()
+            })
         }
     }
 }

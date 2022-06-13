@@ -121,12 +121,14 @@ struct LoginContentView: View{
                                     .frame(width: 45, height: 45)
                     )
                 
-                SecureField("Password", text: $password)
-                    .foregroundColor(purple)
-                    .padding()
-                    .frame(width: 220, height: 47)
-                    .background(pink_light)
-                    .offset(x: 6)
+                SecureField("Password", text: $password) {
+                    // on Submit
+                }
+                .foregroundColor(purple)
+                .padding()
+                .frame(width: 220, height: 47)
+                .background(pink_light)
+                .offset(x: 6)
             }
             
             Button(action: {
@@ -247,12 +249,14 @@ struct SignUpContentView: View{
                                     .frame(width: 45, height: 45)
                     )
                 
-                SecureField("Password", text: $password)
-                    .foregroundColor(purple)
-                    .padding()
-                    .frame(width: 220, height: 47)
-                    .background(pink_light)
-                    .offset(x: 6)
+                SecureField("Password", text: $password) {
+                    // on Submit
+                }
+                .foregroundColor(purple)
+                .padding()
+                .frame(width: 220, height: 47)
+                .background(pink_light)
+                .offset(x: 6)
             }
             
             Button(action: {
