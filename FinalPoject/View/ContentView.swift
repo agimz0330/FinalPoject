@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @StateObject var authUser = AuthUser()
     @State private var isLogin: Bool = true
     
     var body: some View {
@@ -32,6 +33,9 @@ struct ContentView: View {
                 LoginView()
             }
         }
+        .alert(isPresented: $authUser.showAlert, content: {
+            Alert(title: Text("\(authUser.alertTitle)"))
+        })
     }
 }
 

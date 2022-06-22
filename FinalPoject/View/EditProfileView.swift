@@ -11,7 +11,7 @@ struct EditProfileView: View {
     @State private var nickname: String = ""
     @State private var description: String = ""
     @State private var activeTime: Double = 0.0
-    @State private var genderIndex: Int = 0
+    @State private var gender: String = "woman"
     
     var body: some View {
         List{
@@ -63,9 +63,9 @@ struct EditProfileView: View {
                     .bold()
                 Spacer()
                 
-                Picker(selection: $genderIndex, label: Text("Picker")){
-                    Text("男").tag(1)
-                    Text("女").tag(0)
+                Picker(selection: $gender, label: Text("Picker")){
+                    Text("男").tag("man")
+                    Text("女").tag("woman")
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
