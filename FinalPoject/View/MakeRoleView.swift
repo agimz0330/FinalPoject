@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MakeRoleView: View {
-    @State private var gender: String = "woman" // binding
-    @State private var uiImage: UIImage?
+    @ObservedObject var game: Game
+    @Binding var showMakeRoleView: Bool
     
     @State private var backgroundIndex: Int = 1
     @State private var headIndex: Int = 1
@@ -28,7 +28,7 @@ struct MakeRoleView: View {
             HStack(spacing: 0){
                 VStack{
                     Button(action: { // 返回按鈕
-                        
+                        showMakeRoleView = false
                     }, label: {
                         ZStack{
                             Circle()
@@ -45,7 +45,7 @@ struct MakeRoleView: View {
                     Spacer()
                     
                     Button(action: { // 隨機按鈕
-                        if gender == "man"{
+                        if game.user.gender == "man"{
                             backgroundIndex = Int.random(in: 1...15)
                             headIndex = Int.random(in: 1...30)
                             faceIndex = Int.random(in: 1...23)
@@ -73,11 +73,11 @@ struct MakeRoleView: View {
                 // 左上角：返回/隨機按鈕
                 
                 ZStack{
-                    if gender == "man"{
-                        ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: $bgColor)
+                    if game.user.gender == "man"{
+                        ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: bgColor)
                     }
                     else{
-                        WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: $bgColor)
+                        WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: bgColor)
                     }
                     
                     VStack(alignment: .leading){
@@ -94,13 +94,22 @@ struct MakeRoleView: View {
                             }
                             
                             Button(action: { // save
-                                if gender == "man"{
-                                    uiImage = ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: $bgColor).snapshot()
+                                var uiImage: UIImage
+                                
+                                game.user.backgroundImgIndex = backgroundIndex
+                                game.user.headImgIndex = headIndex
+                                game.user.faceImgIndex = faceIndex
+                                game.user.otherImgIndex = otherIndex
+                                
+                                if game.user.gender == "man"{
+                                    uiImage = ManView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, breadIndex: $otherIndex, bgColor: bgColor).snapshot()
                                 }
                                 else{
-                                    uiImage = WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: $bgColor).snapshot()
+                                    uiImage = WomanView(backgroundIndex: $backgroundIndex, headIndex: $headIndex, faceIndex: $faceIndex, glassIndex: $otherIndex, bgColor: bgColor).snapshot()
                                 }
-                                UIImageWriteToSavedPhotosAlbum(uiImage!, nil, nil, nil)
+                                
+                                game.saveImgURL(img: uiImage)
+                                showMakeRoleView = false
                                 
                             }, label: {
                                 ZStack{
@@ -137,7 +146,7 @@ struct MakeRoleView: View {
                         Button(action: {
                             choosePart = "background"
                         }, label: {
-                            if gender == "man"{
+                            if game.user.gender == "man"{
                                 partImgPreview(imgName: "background10")
                             }
                             else{
@@ -145,9 +154,9 @@ struct MakeRoleView: View {
                             }
                         })
                         Button(action: {
-                            choosePart = gender + "_head"
+                            choosePart = game.user.gender + "_head"
                         }, label: {
-                            if gender == "man"{
+                            if game.user.gender == "man"{
                                 partImgPreview(imgName: "man_head2")
                             }
                             else{
@@ -155,9 +164,9 @@ struct MakeRoleView: View {
                             }
                         })
                         Button(action: {
-                            choosePart = gender + "_face"
+                            choosePart = game.user.gender + "_face"
                         }, label: {
-                            if gender == "man"{
+                            if game.user.gender == "man"{
                                 partImgPreview(imgName: "man_face13")
                             }
                             else{
@@ -165,14 +174,14 @@ struct MakeRoleView: View {
                             }
                         })
                         Button(action: {
-                            if gender == "man"{
+                            if game.user.gender == "man"{
                                 choosePart = "man_bread"
                             }
                             else{
                                 choosePart = "woman_glass"
                             }
                         }, label: {
-                            if gender == "man"{
+                            if game.user.gender == "man"{
                                 partImgPreview(imgName: "man_bread9")
                             }
                             else{
@@ -217,13 +226,12 @@ struct MakeRoleView: View {
                 
             }
         }
-    }
-}
-
-struct MakeRoleView_Previews: PreviewProvider {
-    static var previews: some View {
-        MakeRoleView()
-            .previewLayout(.fixed(width: 812, height: 375))
+        .onAppear{
+            backgroundIndex = game.user.backgroundImgIndex
+            headIndex = game.user.headImgIndex
+            faceIndex = game.user.faceImgIndex
+            otherIndex = game.user.otherImgIndex
+        }
     }
 }
 
@@ -245,7 +253,7 @@ struct ManView: View {
     @Binding var headIndex: Int
     @Binding var faceIndex: Int
     @Binding var breadIndex: Int
-    @Binding var bgColor: Color
+    var bgColor: Color
     
     var body: some View{
         let man_head_size: [ImgSize] = [
@@ -347,7 +355,7 @@ struct WomanView: View {
     @Binding var headIndex: Int
     @Binding var faceIndex: Int
     @Binding var glassIndex: Int
-    @Binding var bgColor: Color
+    var bgColor: Color
     
     var body: some View{
         let woman_head_size: [ImgSize] = [

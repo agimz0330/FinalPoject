@@ -9,8 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @StateObject var authUser = AuthUser()
-    @State private var isLogin: Bool = true
+    @StateObject var game = Game()
     
     var body: some View {
         ZStack{
@@ -22,19 +21,19 @@ struct ContentView: View {
                     Text("HOME")
                     Image(systemName: "house")
                 }
-                ProfileView()
+                ProfileView(game: game)
                     .tabItem{
                         Text("Profile")
                         Image(systemName: "person.crop.circle")
                     }
             }
             .accentColor(orange_dark)
-            if !isLogin{
-                LoginView()
+            if !game.isLogin{
+                LoginView(game: game)
             }
         }
-        .alert(isPresented: $authUser.showAlert, content: {
-            Alert(title: Text("\(authUser.alertTitle)"))
+        .alert(isPresented: $game.showAlert, content: {
+            Alert(title: Text("\(game.alertTitle)"))
         })
     }
 }

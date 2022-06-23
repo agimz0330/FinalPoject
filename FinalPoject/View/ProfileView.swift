@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ProfileView: View {
+    @ObservedObject var game: Game
     @State private var showMakeRoleView: Bool = false
     
     var body: some View {
@@ -30,19 +32,22 @@ struct ProfileView: View {
                                 .fill(Color.white)
                                 .frame(width: 135, height: 135)
                             
-                            Image("background15")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 135, height: 135)
-                                .clipShape(Circle())
-                            
+                            Button(action: {
+                                showMakeRoleView = true
+                            }, label: {
+                                WebImage(url: game.user.imgUrl)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 135, height: 135)
+                                    .clipShape(Circle())
+                            })
                         }
                         
-                        Text("Nick Name")
+                        Text("\(game.user.name)")
                             .foregroundColor(purple)
                             .font((.custom("PinclloDemo", size: 30)))
                         
-                        Text("Some introduce of myself...\nI'm a banana;)")
+                        Text("\(game.user.description)")
                             .foregroundColor(purple)
                             .frame(width: 180)
                     }
@@ -53,13 +58,24 @@ struct ProfileView: View {
                     VStack{
                         HStack(alignment: .top){
                             VStack{
-                                Image("womanIcon")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                                
-                                Text("I'm a girl.")
-                                    .foregroundColor(pink_dark)
+                                if game.user.gender == "woman"{
+                                    Image("womanIcon")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                    
+                                    Text("I'm a girl.")
+                                        .foregroundColor(pink_dark)
+                                }
+                                else{
+                                    Image("manIcon")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                    
+                                    Text("I'm a boy.")
+                                        .foregroundColor(pink_dark)
+                                }
                             }
                             .frame(width: 120)
                             
@@ -73,7 +89,7 @@ struct ProfileView: View {
                                 
                                 Text("活躍時間")
                                     .foregroundColor(red)
-                                Text(" 3 p.m.")
+                                Text("\(game.user.activeTime) 'clock")
                                     .foregroundColor(pink_dark)
                             }
                             .frame(width: 120)
@@ -89,7 +105,7 @@ struct ProfileView: View {
                                 VStack(alignment: .trailing){
                                     Text("擁有財產")
                                         .foregroundColor(red)
-                                    Text("$ 50")
+                                    Text("$ \(game.user.money)")
                                         .foregroundColor(pink_dark)
                                 }
                             }
@@ -106,7 +122,7 @@ struct ProfileView: View {
                                 VStack(alignment: .trailing){
                                     Text("電子信箱")
                                         .foregroundColor(red)
-                                    Text("00757015@ntou.mail.edu.tw")
+                                    Text("\(game.user.mail)")
                                         .foregroundColor(pink_dark)
                                 }
                             }
@@ -132,14 +148,19 @@ struct ProfileView: View {
                             Divider()
                             
                             VStack{
-                                Image("logout")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
+                                Button(action: {
+                                    game.logOut()
+                                }, label: {
+                                    Image("logout")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                    
+                                    Text("Log out")
+                                        .foregroundColor(red)
+                                        .font((.custom("PinclloDemo", size: 25)))
+                                })
                                 
-                                Text("Log out")
-                                    .foregroundColor(red)
-                                    .font((.custom("PinclloDemo", size: 25)))
                             }
                             .frame(width: 120)
                         }
@@ -148,7 +169,7 @@ struct ProfileView: View {
                     Divider()
                     
                     NavigationLink(
-                        destination: EditProfileView(),
+                        destination: EditProfileView(game: game),
                         label: {
                             ZStack{
                                 RoundedRectangle(cornerRadius: 20)
@@ -174,15 +195,9 @@ struct ProfileView: View {
             .navigationBarHidden(true)
             
             .fullScreenCover(isPresented: $showMakeRoleView, content: {
-                MakeRoleView()
+                MakeRoleView(game: game, showMakeRoleView: $showMakeRoleView)
             })
         }
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-            .previewLayout(.fixed(width: 812, height: 375))
-    }
-}

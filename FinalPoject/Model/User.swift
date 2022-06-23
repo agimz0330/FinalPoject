@@ -24,12 +24,12 @@ let part_count = ["background": 15, "man_head": 30, "man_face": 23, "man_bread":
 ]
 
 struct User: Codable, Identifiable{
-    @DocumentID var id: String? = nil
+    @DocumentID var id: String?
     var name: String = "" // 暱稱
     var description: String = "Hello..." // 自我介紹
     var gender: String = "woman" // "man" or "woman"
     var mail: String = "" // 信箱
-    var imgUrl: String = "" // 頭像
+    var imgUrl: URL? = nil // 頭像
     var money: Int = 0
     var activeTime: Int = 12 // 活躍時間
     var joinedDate: Date = Date()

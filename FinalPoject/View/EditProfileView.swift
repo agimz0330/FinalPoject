@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EditProfileView: View {
+    @ObservedObject var game: Game
     @State private var nickname: String = ""
     @State private var description: String = ""
     @State private var activeTime: Double = 0.0
@@ -99,18 +100,21 @@ struct EditProfileView: View {
                             .cornerRadius(20)
             )
         }
+        .onAppear{
+            nickname = game.user.name
+            description = game.user.description
+            activeTime = Double(game.user.activeTime)
+            gender = game.user.gender
+        }
         .navigationTitle("Edit your profile")
         .navigationBarTitleDisplayMode(.inline)
         
         .navigationBarItems(trailing: Button("Save"){
-            // action
+            game.user.name = nickname
+            game.user.description = description
+            game.user.activeTime = Int(activeTime)
+            game.user.gender = gender
+            game.editUserData()
         })
-    }
-}
-
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView()
-            .previewLayout(.fixed(width: 812, height: 375))
     }
 }

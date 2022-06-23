@@ -7,11 +7,17 @@
 
 import Foundation
 import SwiftUI
+
 import FirebaseAuth
+
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class Game: ObservableObject{
     @AppStorage("userMail") var userMail: Data?
     @AppStorage("userPassword") var userPassword: Data?
+    
+    @Published var user: User = User()
     
     @Published var isLogin: Bool = false
     @Published var showAlert: Bool = false
@@ -55,10 +61,25 @@ class Game: ObservableObject{
                 
             case .success(let id):
                 print(id)
-                
+                self.createUser(uid: id, mail: mail, name: name)
                 // user. adduser(id, name, email, password)
                 // user.listen to user data  change(id)
             }
+        }
+        
+        logIn(mail: mail, password: password) // 註冊完自動登入
+    }
+    
+    func createUser(uid: String, mail: String, name: String){
+        let db = Firestore.firestore()
+        user.id = uid
+        user.mail = mail
+        user.name = name
+        user.joinedDate = Date()
+        do{
+            try db.collection("users").document(self.user.id!).setData(from: user)
+        }catch{
+            print(error)
         }
         
     }
@@ -85,10 +106,66 @@ class Game: ObservableObject{
                 if authIsLogInFunc(){
                     self.isLogin = true
                 }
+                self.readUserData(uid: id)
                 // user.listen to user data  change(id)
             }
             
         }
     }
+    
+    func logOut(){
+        authLogOut()
+        if !authIsLogInFunc(){
+            self.isLogin = false
+        }
+        else{
+            self.alertTitle = "登出失敗"
+            self.showAlert = true
+        }
+    }
 
+    func setUserData(){
+        let db = Firestore.firestore()
+        do{
+            try db.collection("users").document(user.id!).setData(from: user)
+        }catch{
+            print(error)
+        }
+        
+    }
+    
+    func readUserData(uid: String){
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(uid).getDocument { document, error in
+            guard let document = document,
+                  document.exists,
+                  let userrr = try? document.data(as: User.self) else{
+                return
+            }
+            self.user = userrr
+        }
+    }
+    
+    func editUserData(){
+        let db = Firestore.firestore()
+        do{
+            try db.collection("users").document(user.id!).setData(from: user)
+        }catch{
+            print(error)
+        }
+    }
+    
+    func saveImgURL(img: UIImage){
+        imgToURL(img: img) { result in
+            switch result{
+            case .success(let url):
+                self.user.imgUrl = url
+                self.editUserData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
+

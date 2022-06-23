@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var game: Game
     @State private var showLogin: Bool = true // true: Log in, false: Sign up
     
     var body: some View {
@@ -27,10 +28,10 @@ struct LoginView: View {
                         .frame(width: 360, height: 340)
                     
                     if showLogin{
-                        LoginContentView(showLogin: $showLogin)
+                        LoginContentView(game: game, showLogin: $showLogin)
                     }
                     else{
-                        SignUpContentView(showLogin: $showLogin)
+                        SignUpContentView(game: game,showLogin: $showLogin)
                     }
                 }
             }
@@ -38,14 +39,8 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-            .previewLayout(.fixed(width: 812, height: 375))
-    }
-}
-
 struct LoginContentView: View{
+    @ObservedObject var game: Game
     @Binding var showLogin: Bool
     
     @State private var mail: String = ""
@@ -132,7 +127,7 @@ struct LoginContentView: View{
             }
             
             Button(action: {
-                
+                game.logIn(mail: mail, password: password)
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 20)
@@ -155,6 +150,7 @@ struct LoginContentView: View{
 }
 
 struct SignUpContentView: View{
+    @ObservedObject var game: Game
     @Binding var showLogin: Bool
     
     @State private var name: String = ""
@@ -260,7 +256,7 @@ struct SignUpContentView: View{
             }
             
             Button(action: {
-                
+                game.signUp(name: name, mail: mail, password: password)
             }, label: {
                 ZStack{
                     RoundedRectangle(cornerRadius: 20)

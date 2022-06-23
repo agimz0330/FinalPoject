@@ -52,3 +52,11 @@ func authIsLogInFunc() -> Bool{ // 判斷使用者是否已經登入
         return false
     }
 }
+
+func authLogOut(){
+    do{
+        try Auth.auth().signOut()
+    }catch{
+        print(error)
+    }
+}
