@@ -113,7 +113,15 @@ struct EditProfileView: View {
             game.user.name = nickname
             game.user.description = description
             game.user.activeTime = Int(activeTime)
-            game.user.gender = gender
+            
+            if game.user.gender != gender{
+                game.user.backgroundImgIndex = 1
+                game.user.headImgIndex = 1
+                game.user.faceImgIndex = 1
+                game.user.otherImgIndex = 1
+                
+                game.user.gender = gender
+            }
             game.editUserData()
         })
     }

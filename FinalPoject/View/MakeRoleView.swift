@@ -231,6 +231,7 @@ struct MakeRoleView: View {
             headIndex = game.user.headImgIndex
             faceIndex = game.user.faceImgIndex
             otherIndex = game.user.otherImgIndex
+            print(headIndex)
         }
     }
 }
@@ -448,6 +449,5 @@ struct WomanView: View {
             .scaleEffect(1.1)
         }
         .frame(width: 275, height: 250, alignment: .center)
-        .padding()
     }
 }

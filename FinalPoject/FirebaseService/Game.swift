@@ -62,12 +62,11 @@ class Game: ObservableObject{
             case .success(let id):
                 print(id)
                 self.createUser(uid: id, mail: mail, name: name)
+                self.logIn(mail: mail, password: password) // 註冊完自動登入
                 // user. adduser(id, name, email, password)
                 // user.listen to user data  change(id)
             }
         }
-        
-        logIn(mail: mail, password: password) // 註冊完自動登入
     }
     
     func createUser(uid: String, mail: String, name: String){
@@ -144,6 +143,22 @@ class Game: ObservableObject{
                 return
             }
             self.user = userrr
+            if self.user.gender == "man"{
+                if self.user.headImgIndex>30 || self.user.faceImgIndex>23 || self.user.otherImgIndex>11{
+                    self.user.headImgIndex = 1
+                    self.user.faceImgIndex = 1
+                    self.user.otherImgIndex = 1
+                    self.setUserData()
+                }
+            }
+            else{
+                if self.user.headImgIndex>37 || self.user.faceImgIndex>17 || self.user.otherImgIndex>7{
+                    self.user.headImgIndex = 1
+                    self.user.faceImgIndex = 1
+                    self.user.otherImgIndex = 1
+                    self.setUserData()
+                }
+            }
         }
     }
     
